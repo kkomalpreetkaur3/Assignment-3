@@ -40,4 +40,11 @@ export const validateRequest = (schemas: RequestSchemas) => {
         if (res.headersSent) return;
       }
 
-    
+      next();
+    } catch (error: unknown) {
+      res.status(HTTP_STATUS.BAD_REQUEST).json({
+        message: `Validation error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      });
+    }
+  };
+};
