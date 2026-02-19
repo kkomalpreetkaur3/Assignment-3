@@ -3,6 +3,14 @@ import * as firestoreRepository from "../repositories/firestoreRepository";
 
 const EVENTS_COLLECTION = "events";
 
+const pad6 = (n: number) => String(n).padStart(6, "0");
+
+const generateEventId = async (): Promise<string> => {
+  const snapshot = await firestoreRepository.getDocuments(EVENTS_COLLECTION);
+  const nextNum = snapshot.size + 1;
+  return `evt_${pad6(nextNum)}`;
+};
+
 export const createEvent = async (
   payload: Omit<Event, "id" | "createdAt" | "updatedAt">
 ): Promise<Event> => {
