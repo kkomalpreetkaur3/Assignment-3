@@ -44,6 +44,11 @@ export const getEventByIdHandler = async (
   try {
     const event = await eventService.getEventById(req.params.id);
 
+    if (!event) {
+      return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .json({ message: "Event not found" });
+    }
 
     res.status(HTTP_STATUS.OK).json({ message: "Event retrieved", data: event });
   } catch (error: unknown) {
@@ -58,6 +63,17 @@ export const updateEventHandler = async (
 ) => {
   try {
     const updated = await eventService.updateEvent(req.params.id, req.body);
+
+    if (!updated) {
+      return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .json({ message: "Event not found" });
+    }
+
+    res.status(HTTP_STATUS.OK).json({ message: "Event updated", data: updated });
+  } catch (error: unknown) {
+    next(error);
+  }
 };
 
 export const deleteEventHandler = async (
@@ -67,6 +83,11 @@ export const deleteEventHandler = async (
 ) => {
   try {
     const ok = await eventService.deleteEvent(req.params.id);
+
+    if (!ok) {
+      return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .json({ message: "Event not found" });
     }
 
     res.status(HTTP_STATUS.NO_CONTENT).send();
