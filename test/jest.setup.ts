@@ -1,16 +1,13 @@
-// Always mock firebase in every test
+// test/jest.setup.ts
 jest.mock("../config/firebaseConfig", () => ({
-    db: {
-        collection: jest.fn(),
-        doc: jest.fn(),
-    },
+  db: {
+    collection: jest.fn(),
+    doc: jest.fn(),
+    runTransaction: jest.fn(),
+    batch: jest.fn(() => ({ commit: jest.fn() })),
+  },
 }));
 
-// Reset all mocks after each test
 afterEach(() => {
-    jest.clearAllMocks();
-});
-
-afterAll(() => {
-    jest.resetModules();
+  jest.clearAllMocks();
 });
