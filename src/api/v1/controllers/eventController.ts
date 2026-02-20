@@ -90,7 +90,10 @@ export const deleteEventHandler = async (
         .json({ message: "Event not found" });
     }
 
-    res.status(HTTP_STATUS.NO_CONTENT).send();
+    res.status(HTTP_STATUS.OK).json({
+      message: "Event deleted successfully",
+    });
+
   } catch (error: unknown) {
     next(error);
   }

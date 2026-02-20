@@ -5,6 +5,9 @@
     "joi": "^18.0.2"
   },
   "scripts": {
+  "dev": "ts-node src/server.ts",
+  "start": "node dist/server.js",
+  "build": "tsc",
   "test": "jest"
 },
 
