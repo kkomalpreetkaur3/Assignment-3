@@ -49,3 +49,44 @@ describe("Event Service", () => {
     expect(repo.getDocumentById).toHaveBeenCalled();
     expect(event).toBeNull();
   });
+
+  it("updateEvent should call updateDocument when event exists", async () => {
+    // Arrange
+    (repo.getDocumentById as jest.Mock).mockResolvedValue({
+      data: () => ({
+        id: "evt_000001",
+        name: "ABC",
+        date: "2025-12-25T09:00:00.000Z",
+        capacity: 100,
+        registrationCount: 0,
+        status: "active",
+        category: "general",
+        createdAt: "x",
+        updatedAt: "x",
+      }),
+      exists: true,
+    });
+
+    // Act
+    const updated = await eventService.updateEvent("evt_000001", { name: "New" } as any);
+
+    // Assert
+    expect(repo.updateDocument).toHaveBeenCalled();
+    expect(updated?.name).toBe("New");
+  });
+
+  it("deleteEvent should call deleteDocument when event exists", async () => {
+    // Arrange
+    (repo.getDocumentById as jest.Mock).mockResolvedValue({
+      data: () => ({ id: "evt_000001" }),
+      exists: true,
+    });
+
+    // Act
+    const ok = await eventService.deleteEvent("evt_000001");
+
+    // Assert
+    expect(repo.deleteDocument).toHaveBeenCalled();
+    expect(ok).toBe(true);
+  });
+});
