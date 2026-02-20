@@ -33,3 +33,53 @@ describe("Event Create Validation", () => {
     });
     expect(next).not.toHaveBeenCalled();
   });
+
+  it('should fail when "capacity" is not an integer', () => {
+    // Arrange
+    const req = {
+      body: { name: "Test Event", date: "2025-12-25T09:00:00.000Z", capacity: 50.5 },
+      params: {},
+      query: {},
+    } as Partial<Request> as Request;
+
+    const res = makeRes();
+    const next = jest.fn() as NextFunction;
+    const mw = validateRequest(eventSchemas.create);
+
+    // Act
+    mw(req, res, next);
+
+    // Assert
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({
+      message: 'Validation error: "capacity" must be an integer',
+    });
+  });
+
+  it('should fail when "status" is invalid', () => {
+    // Arrange
+    const req = {
+      body: {
+        name: "Test Event",
+        date: "2025-12-25T09:00:00.000Z",
+        capacity: 100,
+        status: "pending",
+      },
+      params: {},
+      query: {},
+    } as Partial<Request> as Request;
+
+    const res = makeRes();
+    const next = jest.fn() as NextFunction;
+    const mw = validateRequest(eventSchemas.create);
+
+    // Act
+    mw(req, res, next);
+
+    // Assert
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({
+      message:
+        'Validation error: "status" must be one of [active, cancelled, completed]',
+    });
+  });
