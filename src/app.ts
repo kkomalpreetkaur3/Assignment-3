@@ -1,6 +1,9 @@
 import express from "express";
 import healthRoutes from "./api/v1/routes/healthRoutes";
 import eventRoutes from "./api/v1/routes/eventRoutes";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
