@@ -10,12 +10,14 @@
     "swagger-ui-express": "^5.0.1"
   },
   "scripts": {
+    "generate-docs": "ts-node scripts/generate-openapi.ts && npx @redocly/cli build-docs openapi.json --output docs/index.html"
     "dev": "ts-node src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc",
     "test": "jest"
   },
   "devDependencies": {
+    "@redocly/cli": "^2.25.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
