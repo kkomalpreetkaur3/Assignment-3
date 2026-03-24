@@ -8,6 +8,7 @@ dotenv.config();
 
 import { getHelmetConfig } from "../config/helmetConfig";
 import { getCorsOptions } from "../config/corsConfig";
+
 const app = express();
 
 app.use(express.json());
