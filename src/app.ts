@@ -8,7 +8,7 @@ dotenv.config();
 import cors from "cors";
 import { getHelmetConfig } from "../config/helmetConfig";
 import { getCorsOptions } from "../config/corsConfig";
-import { setupSwagger } from "config/swagger";
+import { setupSwagger } from "../config/swagger";
 
 const app = express();
 
