@@ -80,7 +80,8 @@ This API is designed for developers who want to integrate event management funct
 
 ## Link to Public Documentation
 
-   Full API documentation will be available after deployment via GitHub Pages.
+   Full API documentation link:
+   https://kkomalpreetkaur3.github.io/Assignment-3/
 
 ## Local Documentation Access
 
