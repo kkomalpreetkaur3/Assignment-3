@@ -2,10 +2,10 @@ import express from "express";
 import healthRoutes from "./api/v1/routes/healthRoutes";
 import eventRoutes from "./api/v1/routes/eventRoutes";
 import dotenv from "dotenv";
-import cors from "cors";
 
 dotenv.config();
 
+import cors from "cors";
 import { getHelmetConfig } from "../config/helmetConfig";
 import { getCorsOptions } from "../config/corsConfig";
 import { setupSwagger } from "config/swagger";
