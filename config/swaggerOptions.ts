@@ -14,7 +14,7 @@ const swaggerOptions = {
             },
         ],
     },
-    apis: ["./src/api/v1/routes/*.ts", "./src/api/v1/validations/*.ts"],
+    apis: ["./src/api/v1/routes/*.ts", "./src/api/v1/validation/*.ts"],
 };
 
 export const generateSwaggerSpec = () => swaggerJsdoc(swaggerOptions);
